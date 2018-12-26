@@ -250,7 +250,8 @@ public class RecoverableZooKeeper {
 
   private void retryOrThrow(RetryCounter retryCounter, KeeperException e,
       String opName) throws KeeperException {
-    LOG.warn("Possibly transient ZooKeeper, quorum=" + quorumServers + ", exception=" + e);
+    LOG.warn("Possibly transient ZooKeeper, opName = " + opName + ", quorum=" + quorumServers + ", exception=" + e);
+    new Exception().printStackTrace();
     if (!retryCounter.shouldRetry()) {
       LOG.error("ZooKeeper " + opName + " failed after "
         + retryCounter.getMaxAttempts() + " attempts");
@@ -557,7 +558,7 @@ public class RecoverableZooKeeper {
     }
   }
   /**
-   * Convert Iterable of {@link ZKOp} we got into the ZooKeeper.Op
+   * Convert Iterable of {@link Op} we got into the ZooKeeper.Op
    * instances to actually pass to multi (need to do this in order to appendMetaData).
    */
   private Iterable<Op> prepareZKMulti(Iterable<Op> ops)
