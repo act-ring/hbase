@@ -251,7 +251,7 @@ public class RecoverableZooKeeper {
   private void retryOrThrow(RetryCounter retryCounter, KeeperException e,
       String opName) throws KeeperException {
     LOG.warn("Possibly transient ZooKeeper, opName = " + opName + ", quorum=" + quorumServers + ", exception=" + e);
-    new Exception().printStackTrace();
+    new Exception().printStackTrace(System.out);
     if (!retryCounter.shouldRetry()) {
       LOG.error("ZooKeeper " + opName + " failed after "
         + retryCounter.getMaxAttempts() + " attempts");
